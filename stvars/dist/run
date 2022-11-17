@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+
+SIM=cloudGen-dist
+COMP=cloudGen
+PORT=out
+
+SIMU_DIR=$HOME/cd++.new
+
+SIMU=$SIMU_DIR/cd++
+DRAWLOG=$SIMU_DIR/drawlog
+LOGBUFFER=$SIMU_DIR/logbuffer
+
+
+MA=$SIM.ma
+EV=$SIM.ev
+LOG=$SIM.log
+DRW=$SIM.drw
+#OUT=$SIM.out
+LOG_FULL=$LOG.full
+TIME=00:00:05:000
+STEP=00:00:00:100
+
+#DEBUG="-p$SIM.parser -v$SIM.eval -r -v"
+#DEBUG="-v$SIM.eval"
+
+rm -f $LOG* $DRW $OUT
+
+SIMU_ARGS="-m$MA"
+[ -n "$TIME" ]  &&  SIMU_ARGS="$SIMU_ARGS -t$TIME"
+[ -n "$EV" ]    &&  SIMU_ARGS="$SIMU_ARGS -e$EV"
+[ -n "$LOG" ]   &&  SIMU_ARGS="$SIMU_ARGS -l$LOG"
+[ -n "$OUT" ]   &&  SIMU_ARGS="$SIMU_ARGS -o$OUT"
+[ -n "$DEBUG" ] &&  SIMU_ARGS="$SIMU_ARGS $DEBUG"
+
+
+if [ -z "$DEBUGGER" ]; then
+    time $SIMU $SIMU_ARGS
+else
+    $DEBUGGER $SIMU --pargs $SIMU_ARGS
+fi
+
+echo Running drawlog
+$DRAWLOG -n$PORT -m$MA -c$COMP -l$LOG -i$STEP -w4 -p0 > $DRW
+
+#echo Collapsing log files
+#cat $LOG?* | $LOGBUFFER > $LOG_FULL
+

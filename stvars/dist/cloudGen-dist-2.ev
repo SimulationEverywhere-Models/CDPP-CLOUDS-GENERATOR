@@ -1,0 +1,12 @@
+00:00:00:000 dist-average-gen-one 0.8
+00:00:00:100 dist-average-ext-one 0.6
+00:00:00:300 dist-average-gen-two 0.4
+00:00:00:400 dist-average-ext-two 1.0
+00:00:00:500 dist-average-ext-three 0.6
+00:00:00:600 dist-average-gen-three 0.2
+00:00:02:800 dist-average-gen-one -0.4
+00:00:02:900 dist-average-ext-one 0.4
+00:00:02:000 dist-average-gen-two 0.4
+00:00:02:100 dist-average-ext-two -1.0
+00:00:02:200 dist-average-ext-three -0.2
+00:00:02:300 dist-average-gen-three 0.8
